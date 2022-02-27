@@ -1,3 +1,4 @@
+val logbackVersion: String by project
 val kotlinxCoroutinesVersion: String by project
 val kotlinxReactorVersion: String by project
 
@@ -11,4 +12,5 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$kotlinxCoroutinesVersion")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions:$kotlinxReactorVersion")
     implementation(kotlin("stdlib"))
+    testImplementation("ch.qos.logback:logback-classic:$logbackVersion")
 }

@@ -12,9 +12,3 @@ suspend fun <T> withTraceId(traceId: TraceId, f: () -> T): T =
         withContext(MDCContext().plus(TracingContext(traceId))) { f() }
     }
 
-//fun <T> withTraceId(traceId: TraceId, f: () -> Mono<T>): Mono<T> =
-//    MDC.putCloseable(TraceIdKey, traceId.value).use {
-//        io.logik.core.withTraceId(traceId) {
-//            f().contextWrite { it.put(TraceIdKey, traceId) }
-//        }
-//    }
