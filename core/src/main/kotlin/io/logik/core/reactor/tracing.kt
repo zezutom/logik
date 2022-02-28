@@ -9,6 +9,6 @@ fun <T> withTraceId(traceId: TraceId, f: () -> Mono<T>): Mono<T> =
         context.put(TraceId.TraceIdKey, traceId)
     }
 
-fun traceIdMono(): Mono<TraceId?> = Mono.deferContextual { cv ->
+fun getTraceId(): Mono<TraceId?> = Mono.deferContextual { cv ->
     cv.getOrDefault<TraceId>(TraceId.TraceIdKey, null).toMono()
 }
