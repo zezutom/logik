@@ -14,10 +14,9 @@ class TracingTest {
     @Test
     fun withTraceId() {
         val traceId = TraceId.generate()
-        withTraceId(traceId) {
-            Mono.deferContextual {
-                assertEquals(traceId, it.getOrDefault(TraceIdKey, null)).toMono()
-            }
+        withTraceId(traceId) { 
+            verifyTraceId(traceId)
+                .flatMap { verifyTraceId(traceId) }
         }.block()
     }
 
@@ -29,5 +28,9 @@ class TracingTest {
                 assertEquals(traceId, it)
             }.switchIfEmpty { fail("$traceId not found in the context!") }
         }.block()
+    }
+
+    private fun verifyTraceId(traceId: TraceId) = Mono.deferContextual {
+        assertEquals(traceId, it.getOrDefault(TraceIdKey, null)).toMono()
     }
 }
