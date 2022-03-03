@@ -1,14 +1,12 @@
+val ktorVersion: String by project
+
 plugins {
     kotlin("jvm")
 }
 
-group = "me.zezulat"
-version = "1.0-SNAPSHOT"
-
-repositories {
-    mavenCentral()
-}
-
 dependencies {
+    implementation("io.ktor:ktor-client-core:$ktorVersion")
+    implementation("io.ktor:ktor-client-logging:$ktorVersion")
     implementation(kotlin("stdlib"))
+    implementation(project(":core"))
 }
