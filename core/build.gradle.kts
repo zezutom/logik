@@ -6,6 +6,19 @@ plugins {
     kotlin("jvm")
 }
 
+configurations {
+    create("test")
+}
+
+tasks.register<Jar>("testArchive") {
+    archiveBaseName.set("core-test")
+    from(project.the<SourceSetContainer>()["test"].output)
+}
+
+artifacts {
+    add("test", tasks["testArchive"])
+}
+
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutinesVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:$kotlinxCoroutinesVersion")

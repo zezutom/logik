@@ -14,7 +14,7 @@ import io.ktor.utils.io.core.*
 import io.logik.core.withTraceId
 import java.nio.charset.Charset
 
-class Logging(private val logger: Logger, private val level: LogLevel) {
+class Logging(val logger: Logger, private val level: LogLevel) {
     
     class Config {
         var logger = Logger.DEFAULT

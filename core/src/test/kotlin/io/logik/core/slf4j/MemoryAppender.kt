@@ -34,4 +34,8 @@ class MemoryAppender : ListAppender<ILoggingEvent>() {
 
     fun containsTraceId(traceId: TraceId, level: Level): Boolean =
         this.list.any { it.mdcPropertyMap[TraceIdKey] == traceId.value && it.level == level }
+
+    fun contains(message: String, level: Level): Boolean =
+        this.list.stream()
+            .anyMatch { event -> event.toString().contains(message) && event.level == level }
 }
